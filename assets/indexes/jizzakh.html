@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Jizzakh</title>
+    <style>
+        html{background-color: #e9ecef;}
+      </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__top">
+                <div class="header__line">
+                    <div class="header__logo">
+                        <img src="../img/logo-no-background.png" alt="" height="60px">
+                    </div>
+                    <div class="header__nav">
+                        <a href="../../index.html" class="nav__item">Home</a>
+                        <!-- <a href="#about" class="nav__item">About</a>
+                        <a href="#region" class="nav__item">Regions</a>
+                        <a href="#" class="nav__item">News</a> -->
+                    </div>
+                </div>
+                <div class="header__profile">
+                    <div class="profile__navbar">
+                        <i class="fi fi-bs-search nav__col"></i>
+                        <input class="profile__nav profile__nav_btn" type="text" id="searchInput" placeholder="Search by name...">
+                    </div> 
+                    <div class="profile__navbar profile__navbar-center">
+                        <i class="fi fi-br-enter nav__col"></i>
+                        <a href="" class="profile__nav">Log in</a>
+                    </div> 
+                    <div class="profile__navbar">
+                        <i class="fi fi-br-shopping-cart nav__col"></i>
+                        <a href="" class="profile__nav">English</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="regions__intro">
+                <div class="regions_row regions_row-left" >
+                    <div class="regions_regions">
+                        <a href="andijon.html" class="regions_cards">Andijon region</a>
+                        <a href="bukhara.html" class="regions_cards">Bukhara region</a>
+                        <a href="fergana.html" class="regions_cards">Fergana region</a>
+                        <a href="namangan.html" class="regions_cards">Namangan region</a>
+                        <a href="navoiy.html" class="regions_cards">Navoiy region</a>
+                        <a href="qashqadaryo.html" class="regions_cards">Qashqadaryo region</a>
+                        <a href="qoraqolpogiston.html" class="regions_cards">Republic of Karakalpakstan</a>
+                        <a href="samarqand.html" class="regions_cards">Samarqand region</a>
+                        <a href="sirdaryo.html" class="regions_cards">Sirdaryo region</a>
+                        <a href="surhandaryo.html" class="regions_cards">Surxondaryo region</a>
+                        <a href="toshkent.html" class="regions_cards">Tashkent city</a>
+                        <a href="toshkentv.html" class="regions_cards">Tashkent region</a>
+                        <a href="xorazm.html" class="regions_cards">Xorazm region</a>
+                    </div>
+                </div>
+                <div class="regions_row regions_row-right">
+                    <div class="markets">
+                        <div class="regions_row">
+                            <h1 style="text-align: center;">Market Data</h1>
+                           
+                            <div id="marketData"></div>
+                            <div id="marketItemDetails"></div>
+
+                            <script>
+                                // Function to fetch and filter market data
+                                async function fetchAndFilterMarketData() {
+                                    try {
+                                        const response = await fetch('../js/jizzakh.json'); // Replace 'market_data.json' with the path to your JSON file
+                                        const marketData = await response.json();
+
+                                        const marketDataDiv = document.getElementById('marketData');
+                                        marketDataDiv.innerHTML = ''; // Clear previous content
+
+                                        // Create HTML elements for filtered data and append to marketDataDiv
+                                        marketData.forEach(item => {
+                                            if (parseInt(item.Jamisavdoorinlarison) > 0) { // Filter condition
+                                                const marketItemDiv = document.createElement('div');
+                                                marketItemDiv.classList.add('marketItem'); // Add marketItem class
+                                                marketItemDiv.innerHTML = `
+                                                    <h2>${item.Bozorlarvasavdokomplekslarinomi}</h2>
+                                                    <p><strong>Jami:</strong> ${item.Jamisavdoorinlarison}</p>
+                                                    <p><strong>Savdo Shahobchalari:</strong> ${item.shundanturgunsavdoshahobchasi}</p>
+                                                    <p><strong>Rastalar:</strong> ${item.shundanrasta}</p>
+                                                `;
+                                                marketItemDiv.addEventListener('click', () => showItemDetails(item)); // Add click event listener
+                                                marketDataDiv.appendChild(marketItemDiv);
+                                            }
+                                        });
+                                    } catch (error) {
+                                        console.error('Error fetching market data:', error);
+                                    }
+                                }
+
+                                // Function to show item details when clicked
+                                // function showItemDetails(item) {
+                                //     const detailsDiv = document.getElementById('marketItemDetails');
+                                //     detailsDiv.innerHTML = `
+                                //         <h2>${item.Bozorlarvasavdokomplekslarinomi}</h2>
+                                //         <p><strong>jami:</strong> ${item.Jamisavdoorinlarison}</p>
+                                //         <p><strong>Savdo shahobchalari:</strong> ${item.shundanturgunsavdoshahobchasi}</p>
+                                //         <p><strong>Rastlar:</strong> ${item.shundanrasta}</p>
+                                //     `;
+                                //     detailsDiv.style.display = 'block'; // Show details
+                                // }
+
+                                // Call the function to fetch and filter the data
+                                fetchAndFilterMarketData();
+
+                                // Add event listener for search input
+                                document.getElementById('searchInput').addEventListener('input', function() {
+                                    const searchValue = this.value.toLowerCase();
+                                    const marketItems = document.querySelectorAll('.marketItem');
+                                    
+                                    marketItems.forEach(item => {
+                                        const itemName = item.querySelector('h2').innerText.toLowerCase();
+                                        if (itemName.includes(searchValue)) {
+                                            item.style.display = 'block';
+                                        } else {
+                                            item.style.display = 'none';
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+        </div>
+    </header>
+
+    <!-- <section class="section">
+        <div class="intro">
+                <div class="intro__row">
+                    <div class="intro_column">
+                        <a href="andijon.html" class="intro__cards">Andijan region</a>
+                        <a class="intro__cards">Bukhara region</a>
+                        <a class="intro__cards">Fergana region</a> 
+                    
+                    </div>
+                    <div class="intro_column">
+                        <a class="intro__cards">Xorazm region</a>
+                        <a class="intro__cards">Namangan region</a>
+                        <a class="intro__cards">Navoiy region</a>
+                        
+                    </div>
+                    <div class="intro_column">
+                        <a class="intro__cards">Republic of Karakalpakstan</a>
+                        <a class="intro__cards">Samarqand region</a>
+                        <a class="intro__cards">Sirdaryo region</a>
+                    </div>
+                    <div class="intro_column">
+                        <a class="intro__cards">Surxondaryo region</a>
+                        <a class="intro__cards">Tashkent region</a>
+                        <a class="intro__cards">Tashkent city</a>
+                    </div>
+                </div>
+                <div class="intro_row">
+                    <div class="intro_rows">
+                        <a class="intro__cards intro__cards-last">Jizzakh viloyati</a>
+                        <a class="intro__cards intro__cards-last">Qashqadaryo viloyati</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  -->
+
+    <script src="index.js"></script>
+</body>
+</html>

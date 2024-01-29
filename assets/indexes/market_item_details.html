@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <title> Data</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header__top">
+                <div class="header__line">
+                    <div class="header__logo">
+                        <img src="../img/logo-no-background.png" alt="" height="60px">
+                    </div>
+                    <div class="header__nav">
+                        <a href="../../index.html" class="nav__item">Home</a>
+                        <!-- <a href="#about" class="nav__item">About</a>
+                        <a href="#region" class="nav__item">Regions</a>
+                        <a href="#" class="nav__item">News</a> -->
+                    </div>
+                </div>
+                <div class="header__profile">
+                    <div class="profile__navbar">
+                        <i class="fi fi-bs-search nav__col"></i>
+                         <input class="profile__nav profile__nav_btn" type="text" id="searchInput" placeholder="Search by name...">
+                    </div> 
+                    <div class="profile__navbar profile__navbar-center">
+                        <i class="fi fi-br-enter nav__col"></i>
+                        <a href="" class="profile__nav">Log in</a>
+                    </div> 
+                    <div class="profile__navbar">
+                        <i class="fi fi-br-shopping-cart nav__col"></i>
+                        <a href="" class="profile__nav">English</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="regions__intro">
+                <div class="regions_row regions_row-left" >
+                    <div class="regions_regions">
+                        <a href="andijon.html" class="regions_cards">Andijon region</a>
+                        <a href="bukhara.html" class="regions_cards">Bukhara region</a>
+                        <a href="fergana.html" class="regions_cards">Fergana region</a>
+                        <a href="jizzakh.html" class="regions_cards">Jizzakh region</a>
+                        <a href="namangan.html" class="regions_cards">Namangan region</a>
+                        <a href="navoiy.html" class="regions_cards">Navoiy region</a>
+                        <a href="qashqadaryo.html" class="regions_cards">Qashqadaryo region</a>
+                        <a href="qoraqolpogiston.html" class="regions_cards">Republic of Karakalpakstan</a>
+                        <a href="samarqand.html" class="regions_cards">Samarqand region</a>
+                        <a href="sirdaryo.html" class="regions_cards">Sirdaryo region</a>
+                        <a href="surhandaryo.html" class="regions_cards">Surxondaryo region</a>
+                        <a href="toshkent.html" class="regions_cards">Tashkent city</a>
+                        <a href="toshkentv.html" class="regions_cards">Tashkent region</a>
+                    </div>
+                </div>
+                <div class="regions_row regions_row-right">
+                    <div class="markets">
+                        <div class="regions_row" style="text-align: center;">
+                           
+                            <h1>Market Item Details</h1>
+                                <div id="itemDetails"></div>
+
+                                <script>
+                                    // Get the item details from the URL query parameters
+                                    const urlParams = new URLSearchParams(window.location.search);
+                                    const itemName = urlParams.get('name');
+                                    const itemDetails = JSON.parse(urlParams.get('details'));
+
+                                    const itemDetailsDiv = document.getElementById('itemDetails');
+                                    itemDetailsDiv.innerHTML = `
+                                        <h2 class="item_title">${itemName}</h2>
+                                        <table>
+                                            <tr>
+                                                <th>Ism Sharif</th>
+                                                <th>Contact</th>
+                                                <th>Magazim</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Abduqodirov Jamshid</td>
+                                                <td>+998(90)123-45-67</td>
+                                                <td>Turg'un shahobcha</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Abduhakimov Qayum</td>
+                                                <td>+998(90)123-45-67</td>
+                                                <td>Rasta</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shermurodov Umid</td>
+                                                <td>+998(90)123-45-67</td>
+                                                <td>Turg'un shahobcha / Rasta</td>
+                                            </tr>
+                                        </table>
+                                    `;
+                                </script>
+
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+        </div>
+    </header>
+    
+</body>
+</html>
